@@ -39,14 +39,6 @@ flowchart LR
     D --> END((End)):::terminal
 ```
 
-| Agent / Node | Primary Responsibility | Backing Tech / Tools |
-|---|---|---|
-| **🛡️ Travel Guardrail** | Validates intent, sanitizes inputs, and filters prompt injections before agent handoff. | Groq Classification Node |
-| **🛫 Flight Agent** | Extracts routes, dates, and origin/destination constraints to resolve flight segments. | `airportsdata`, `pycountry` |
-| **🏨 Hotel Agent** | Conducts web discovery for stay recommendations matching requested budget tiers. | Tavily Search API |
-| **🗓️ Itinerary Agent** | Combines flight and hotel contexts to construct realistic day-by-day travel blocks. | Groq LLM Planner |
-| **📝 Synthesis Agent** | Formats final combined responses, sets metadata, and renders markdown structures. | LangGraph State Reducer |
-
 ---
 
 ## 🔒 Source Code Access Notice
