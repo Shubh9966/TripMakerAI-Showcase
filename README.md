@@ -84,8 +84,6 @@ flowchart LR
 ## 🛡️ Production Guardrails & Rate Limiting
 
 - **Intent Classifier:** Every request is first evaluated by a zero-temperature classification guardrail. Non-travel requests exit cleanly before triggering any external tools or LLM nodes.
-- **Sliding-Window Limiter:** Tracks requests by IP address within a sliding 1-hour window, persisted directly in PostgreSQL (`rate_limit_hits`). An automatic in-memory fallback engages if the database is unreachable.
-- **Reverse Proxy Handling:** Inspects the `X-Forwarded-For` header using trusted hop counts to reliably resolve client IPs behind proxies such as Render or Cloudflare.
 
 ---
 
