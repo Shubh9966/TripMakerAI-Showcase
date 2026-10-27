@@ -1,0 +1,196 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripMaker AI | Multi-Agent Travel Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(23, 32, 54, 0.65);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --code-bg: #030712;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 650px;
+      margin: 0 auto 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    p { color: var(--text-muted); margin-bottom: 16px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .grid-item h3 {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .grid-item p {
+      font-size: 0.88rem;
+      margin-bottom: 0;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      margin: 14px 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0b0f19;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.9; }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">LangGraph • FastAPI • Groq</span>
+      <h1>✈️ TripMaker AI</h1>
+      <p class="subtitle">Multi-Agent Travel Planner Orchestrating Autonomous Flight Search, Accommodation Discovery, and Day-by-Day Scheduling.</p>
+      <a href="mailto:shubham.shivare9112@gmail.com" class="btn">Request Code Access</a>
+    </header>
+
+    <div class="card">
+      <h2>🛡️ Architecture & Execution Flow</h2>
+      <p>Requests are evaluated against a front-door guardrail before running through deterministic LangGraph nodes:</p>
+      <pre>Start ➔ [Travel Guardrail] ➔ [Flight Agent] ➔ [Hotel Agent] ➔ [Itinerary Agent] ➔ [Final Response] ➔ End</pre>
+      <div class="grid">
+        <div class="grid-item">
+          <h3>Input Validation</h3>
+          <p>Zero-temperature classifier blocks non-travel queries and prompt injection attempts.</p>
+        </div>
+        <div class="grid-item">
+          <h3>State Checkpointing</h3>
+          <p>PostgreSQL-backed state saver preserves context across multi-turn sessions.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Low-Latency Engine</h3>
+          <p>Groq LPU acceleration keeps multi-step planning responsive.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🔌 API Signature</h2>
+      <p>Endpoints support thread-based conversation continuity:</p>
+      <pre>POST /api/travel
+Content-Type: application/json
+
+{
+  "message": "Plan a 3-day trip to Manali under ₹25,000",
+  "thread_id": "session-unique-id"
+}</pre>
+    </div>
+
+    <footer>
+      <p>TripMaker AI Architecture Showcase &copy; 2026. Built by Shubham Shivhare.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
