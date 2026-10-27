@@ -20,6 +20,22 @@
 </div>
 
 ---
+## 🏗️ Architecture & Orchestration
+
+Every request is processed sequentially across specialized nodes within a LangGraph state graph:
+
+```mermaid
+flowchart LR
+    classDef default fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4;
+    classDef terminal fill:#313244,stroke:#a6adc8,stroke-width:1.5px,color:#cdd6f4;
+
+    START((Start)):::terminal --> G{🛡️ Travel Guardrail}
+    G -- Not Travel / Abuse --> END((Exit)):::terminal
+    G -- Valid Request --> A[🛫 Flight Agent]
+    A --> B[🏨 Hotel Agent]
+    B --> C[🗓️ Itinerary Agent]
+    C --> D[📝 Final Synthesis Agent]
+    D --> END
 
 ## 🔒 Source Code Access Notice
 
@@ -39,19 +55,4 @@
 
 ---
 
-## 🏗️ Architecture & Orchestration
 
-Every request is processed sequentially across specialized nodes within a LangGraph state graph:
-
-```mermaid
-flowchart LR
-    classDef default fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4;
-    classDef terminal fill:#313244,stroke:#a6adc8,stroke-width:1.5px,color:#cdd6f4;
-
-    START((Start)):::terminal --> G{🛡️ Travel Guardrail}
-    G -- Not Travel / Abuse --> END((Exit)):::terminal
-    G -- Valid Request --> A[🛫 Flight Agent]
-    A --> B[🏨 Hotel Agent]
-    B --> C[🗓️ Itinerary Agent]
-    C --> D[📝 Final Synthesis Agent]
-    D --> END
